@@ -1,0 +1,9 @@
+flask
+pyTelegramBotAPI
+requests
+django
+waitress
+urlopen
+beautifulsoup4
+lxml
+sports.py
