@@ -36,4 +36,4 @@ Alternatively, you can deploy your own copy of the app using the web-based flow:
 
 ## License
 
-License stuff is [here](https://gist.github.com/0xnu/d11da49c85eeb7272517a9010bbdf1ab). IDGAF! Do what you want with it. 🦁✌🏽
+License stuff is [here](https://gist.github.com/0xnu/d11da49c85eeb7272517a9010bbdf1ab). Do what you want with it!
