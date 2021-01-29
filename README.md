@@ -32,7 +32,7 @@ Alternatively, you can deploy your own copy of the app using the web-based flow:
 
 ## Live Example
 
-[![Sporty on Telegram](https://i.ibb.co/F0N2SZs/telegram.png)](https://t.me/SportydBot)
+[![Sporty on Telegram](https://i.ibb.co/F0N2SZs/telegram.png)](https://t.me/SporteaBot)
 
 ## License
 
