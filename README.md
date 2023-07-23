@@ -6,13 +6,14 @@ Telegram bot for displaying the latest news, sports schedules and injury updates
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install following
 
-```python
-## Prerequisites
-python3 -m venv .venv
-source .venv/bin/activate
-pip3 install -r requirements.txt
-python3 -m pip install --upgrade pip
-deactivate
+```shell
+make dev
+```
+
+Deactivate virtual environment
+
+```shell
+make deactivate
 ```
 
 ### Instructions

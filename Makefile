@@ -1,4 +1,4 @@
-.PHONY: help pull acp tag release status log
+.PHONY: help pull dev deactivate acp tag release status log
 
 # Help message
 help:
@@ -12,6 +12,17 @@ RELEASE_NOTE ?= "Release Note"
 # Pull latest changes
 pull: ## Pull latest changes
 	git pull origin $(BRANCH)
+
+
+dev: ## Create virtual environment and install dependencies
+	@python3 -m venv .venv
+	@pip3 install -r requirements.txt && python3 -m pip install --upgrade pip
+
+activate: ## Print instructions to activate the virtual environment
+	@echo "To activate the virtual environment, use 'source .venv/bin/activate' command in your shell"
+
+deactivate: ## Deactivate virtual environment
+	@echo "To deactivate virtual environment, use 'deactivate' command in your shell"
 
 acp: ## Add, Commit and Push
 	@git add .
