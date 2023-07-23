@@ -1,41 +1,22 @@
-# Live NHL Score from Past 7 Days
 import requests
-from bs4 import BeautifulSoup
-import re
-import sys
-import datetime
-from time import time
-import re
-
-# import urllib2
-try:
-    # For Python 3.0 and later
-    from urllib.request import urlopen
-except ImportError:
-    # Fall back to Python 2's urllib2
-    from urllib2 import urlopen
+import json
 
 def NHLScores():
+    response = requests.get("http://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard")
+    data = response.json()
 
-        url = "http://www.livescores.com/hockey/nhl/regular-season/results/"
-        page  = urlopen(url)
-        soup = BeautifulSoup(page, "lxml")
+    ret = ''
+    for event in data['events']:
+        home_team = event['competitions'][0]['competitors'][0]['team']['displayName']
+        home_score = event['competitions'][0]['competitors'][0]['score']
+        away_team = event['competitions'][0]['competitors'][1]['team']['displayName']
+        away_score = event['competitions'][0]['competitors'][1]['score']
+        status = event['status']['type']['description']
 
-        o = []
-        gms = soup.findAll('div', attrs={'class':'row-gray'})
+        ret += f"\n  {home_team} [Home] - [Away] {away_team} Score: {home_score} - {away_score}\n"
+        ret += f"  Game Status: {status}\n"
 
-        for gm in gms:
-            g = gm.getText()
-            g = g.replace('FT', '\n ')
-            g = g.replace('OT', '\n ')
-            g = re.sub(r'\(.*\)', '', g)
-            o.append(g)
-
-        # output
-        if len(o) == 0:
-            return("I didn't find any score at {0}".format(url))
-        else:
-            return("{0}".format("\n".join(o)))
+    return ret
 
 nhlscores = NHLScores()
-#print(cfl)
+#print(nhlscores)

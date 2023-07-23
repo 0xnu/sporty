@@ -6,7 +6,7 @@ help:
 
 VERSION=0.0.0
 BRANCH=main
-COMMIT_MSG ?= "nfl scores code revised"
+COMMIT_MSG ?= "code refinements"
 RELEASE_NOTE ?= "Release Note"
 
 # Pull latest changes
