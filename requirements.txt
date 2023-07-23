@@ -6,4 +6,3 @@ waitress
 urlopen
 beautifulsoup4
 lxml
-sports.py

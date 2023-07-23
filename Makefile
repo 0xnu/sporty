@@ -4,10 +4,10 @@
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\\033[36m%-30s\\033[0m %s\\n", $$1, $$2}'
 
-VERSION=0.0.0
+VERSION=2.0.0
 BRANCH=main
-COMMIT_MSG ?= "soccer scores code revised"
-RELEASE_NOTE ?= "Release Note"
+COMMIT_MSG ?= "requirements.txt"
+RELEASE_NOTE ?= "Code Refinements"
 
 # Pull latest changes
 pull: ## Pull latest changes
