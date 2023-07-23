@@ -4,9 +4,9 @@
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\\033[36m%-30s\\033[0m %s\\n", $$1, $$2}'
 
-VERSION=2.0.0
+VERSION=2.0.1
 BRANCH=main
-COMMIT_MSG ?= "requirements.txt"
+COMMIT_MSG ?= "bot.py"
 RELEASE_NOTE ?= "Code Refinements"
 
 # Pull latest changes

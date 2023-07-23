@@ -18,5 +18,5 @@ def MLBScores():
 
     return ret
 
-mlb = MLBScores()
-#print(mlb)
+mlbscores = MLBScores()
+#print(mlbscores)

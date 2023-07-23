@@ -17,6 +17,7 @@ from waitress import serve
 from nfl.nflscores import nfl
 from nhl.nhlscores import nhlscores
 from nhl.nhltable import nhltable
+from mlb.mlbscores import mlbscores
 from soccer.bundesliga_table import bundesligatable
 from soccer.bundesliga_scores import bundesligascores
 from soccer.epltable import t
@@ -47,10 +48,15 @@ def bot_polling():
         try:
             print("Starting bot polling now. New bot instance started!")
             bot.polling(none_stop=True, interval=config.bot_interval, timeout=config.bot_timeout)
-        except Exception as ex:
-            print("Bot polling failed, restarting in {}sec. Error:\n{}".format(config.bot_timeout, ex))
+        except telebot.apihelper.ApiException as ex:
+            print("Bot polling failed due to API exception, restarting in {}sec. Error:\n{}".format(config.bot_timeout, ex))
             bot.stop_polling()
-            sleep(bot_timeout)
+            sleep(config.bot_timeout)
+        except Exception as ex:
+            print("Bot polling failed due to an unknown exception, restarting in {}sec. Error:\n{}".format(config.bot_timeout, ex))
+            traceback.print_exc()
+            bot.stop_polling()
+            sleep(config.bot_timeout)
         else:
             bot.stop_polling()
             print("Bot polling loop finished.")
@@ -95,9 +101,12 @@ ussportsnews = request['articles']
 
 @bot.message_handler(regexp="US News")
 def send_news(m):
-    for item in ussportsnews:
-        user_msg = (item['title'] + ": " + item['url'])
-        bot.reply_to(m, user_msg)
+    try:
+        for item in ussportsnews:
+            user_msg = (item['title'] + ": " + item['url'])
+            bot.reply_to(m, user_msg)
+    except Exception as e:
+        bot.reply_to(m, "Sorry, an error occurred while fetching US News: {}".format(e))
 
 # uk sports news
 uksportsnews = requests.get(config.uksports)
@@ -107,9 +116,12 @@ uksportsnews = request['articles']
 
 @bot.message_handler(regexp="UK News")
 def send_news(m):
-    for item in uksportsnews:
-        user_msg = (item['title'] + ": " + item['url'])
-        bot.reply_to(m, user_msg)
+    try:
+        for item in uksportsnews:
+            user_msg = (item['title'] + ": " + item['url'])
+            bot.reply_to(m, user_msg)
+    except Exception as e:
+        bot.reply_to(m, "Sorry, an error occurred while fetching UK News: {}".format(e))
 
 # basketball section
 @bot.message_handler(regexp="🏀 Basketball")
@@ -353,6 +365,22 @@ def send_nhlscores(m):
 @bot.message_handler(regexp="🥅 NHL Table")
 def send_nhlfixtures(m):
   user_msg = nhltable
+  bot.reply_to(m, user_msg)
+
+#baseball section
+@bot.message_handler(regexp="⚾️ Baseball")
+def send_baseball(m):
+    user_markup = telebot.types.ReplyKeyboardMarkup(True, True)
+    user_markup.row('⚾️ MLB Scores')
+    user_markup.row('👈 Main Menu')
+    cid = m.chat.id
+    user_msg = 'Baseball scores and table.\n\n'
+    bot.send_message(cid, user_msg, reply_markup=user_markup)
+
+@bot.message_handler(regexp="⚾️ MLB Scores")
+def send_mlbscores(m):
+  d = date.today()
+  user_msg = (str(d) + "\n \n" + mlbscores)
   bot.reply_to(m, user_msg)
 
 polling_thread = threading.Thread(target=bot_polling)
