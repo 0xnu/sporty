@@ -1,22 +1,27 @@
-# Telegram Sports Bot
+## Telegram Sports Bot
 
 Telegram bot for displaying the latest news, sports schedules and injury updates.
 
-## Install Requirements
+### Install dependencies
 
-Install the project's dependencies with:
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install following
 
-```shell
+```python
+## Prerequisites
+python3 -m venv .venv
+source .venv/bin/activate
 pip3 install -r requirements.txt
+python3 -m pip install --upgrade pip
+deactivate
 ```
 
-## Instructions
+### Instructions
 
 - Create **config.py** inside the root directory.
 - Define **api_key** and grab a key from [Bot Father](https://telegram.me/BotFather).
 - [News API](https://newsapi.org/) for UK and US sports news. 😉
 
-## Local Development
+### Local Development
 
 Fire up the bot:
 
@@ -24,16 +29,30 @@ Fire up the bot:
 python3 bot.py
 ```
 
-## Deployment to Production
+### Deployment to Production
 
 Alternatively, you can deploy your own copy of the app using the web-based flow:
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
-## Live Example
+### Live Example
 
 [![Sporty on Telegram](https://i.ibb.co/F0N2SZs/telegram.png)](https://t.me/SporteaBot)
 
-## License
+### Contributing
 
-License stuff is [here](https://gist.github.com/0xnu/d11da49c85eeb7272517a9010bbdf1ab). Do what you want with it!
+Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+
+### Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/moatsystems/imdb_scrapy/tags).
+
+### License
+
+This project is licensed under the [Unlicense License](LICENSE) - see the file for details.
+
+### Copyright
+
+(c) 2020 [Finbarrs Oketunji](https://finbarrs.eu).
+
+[![CC0](http://mirrors.creativecommons.org/presskit/buttons/88x31/svg/cc-zero.svg)](LICENSE)
