@@ -1,46 +1,26 @@
-# Current Ligue 1 Table
-import sys
 import requests
 from bs4 import BeautifulSoup
 
-# import urllib2
-try:
-    # For Python 3.0 and later
-    from urllib.request import urlopen
-except ImportError:
-    # Fall back to Python 2's urllib2
-    from urllib2 import urlopen
-
-w,h=9,21
-teamInfo = [[0 for x in range(w)] for y in range(h)]
-
-url = "http://www.livescores.com/soccer/france/ligue-1/"
-
-page  = urlopen(url)
-soup = BeautifulSoup(page, "lxml")
-
-team = soup.findAll("div", {"class":"team"})
-pts = soup.findAll("div", {"class":"pts"})
-
 def LigueoneTable():
 
-  table = []
+  url = "http://www.livescores.com/soccer/france/ligue-1/"
 
-  z = 0
-  for x in range(0,21):
-    teamInfo[x][0] = team[x].text
-    for y in range(1, 9):
-      teamInfo[x][y] = pts[z].text
-      z+=1
+  page = requests.get(url)
+  soup = BeautifulSoup(page.content, "lxml")
 
-  #Format the print
-  for x in range (0, 21):
-    if x == 0:
-      table.append("%-*s %s" % (5, teamInfo[x][8], teamInfo[x][0]))
-    if x != 0 and x < 21:
-      table.append("%-*s %s" % (5, teamInfo[x][8], teamInfo[x][0]))
+  table = soup.find("table", {"class": "Yd Zd"})
 
-  return '\n'.join(table)
+  # Extract the table rows
+  rows = table.find_all("tr")
 
-ligueonetable = LigueoneTable()
-#print (ligueonetable)
+  for row in rows:
+    cols = row.find_all("td")
+    row_data = []
+    for col in cols:
+      row_data.append(col.text)
+    if row_data:  # Check if row_data is not empty
+      yield row_data  # Yield row_data for each row
+
+# Use the LigueoneTable function
+ligueonetable = list(LigueoneTable())  # Convert the generator to a list
+#print(ligueonetable)
