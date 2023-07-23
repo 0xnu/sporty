@@ -1,37 +1,22 @@
-# Live Serie A Score from Past 7 Days
-import sys
 import requests
-from bs4 import BeautifulSoup
-
-# import urllib2
-try:
-    # For Python 3.0 and later
-    from urllib.request import urlopen
-except ImportError:
-    # Fall back to Python 2's urllib2
-    from urllib2 import urlopen
-
-url = "http://www.livescores.com/soccer/italy/serie-a/results/7-days/"
-
-page  = urlopen(url)
-soup = BeautifulSoup(page, "lxml")
-
-games = soup.findAll("div", {"class":"row-gray"})
-
-width = 35
+import json
 
 def SerieaScores():
+    response = requests.get("http://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard")
+    data = response.json()
 
-  scores = []
+    ret = ''
+    for event in data['events']:
+        home_team = event['competitions'][0]['competitors'][0]['team']['displayName']
+        home_score = event['competitions'][0]['competitors'][0]['score']
+        away_team = event['competitions'][0]['competitors'][1]['team']['displayName']
+        away_score = event['competitions'][0]['competitors'][1]['score']
+        status = event['status']['type']['description']
 
-  for game in games:
-    scores.append(game.text)
+        ret += f"\n  {home_team} [Home] - [Away] {away_team} Score: {home_score} - {away_score}\n"
+        ret += f"  Game Status: {status}\n"
 
-  # output
-  if len(scores) == 0:
-    return("I didn't find any score at {0}".format(url))
-  else:
-    return('*' * (width + 4) + "{0}".format("\n".join(scores)) + '*' * (width + 4))
+    return ret
 
 serieascores = SerieaScores()
-# print (serieascores)
+#print(serieascores)

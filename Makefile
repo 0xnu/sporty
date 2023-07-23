@@ -6,7 +6,7 @@ help:
 
 VERSION=0.0.0
 BRANCH=main
-COMMIT_MSG ?= "code refinements"
+COMMIT_MSG ?= "soccer scores code revised"
 RELEASE_NOTE ?= "Release Note"
 
 # Pull latest changes

@@ -1,40 +1,22 @@
-# Live MLS Score from Past 7 Days
 import requests
-from bs4 import BeautifulSoup
-import re
-import sys
-import datetime
-from time import time
-import re
-
-# import urllib2
-try:
-    # For Python 3.0 and later
-    from urllib.request import urlopen
-except ImportError:
-    # Fall back to Python 2's urllib2
-    from urllib2 import urlopen
+import json
 
 def MLScores():
-        url = "http://www.livescores.com/soccer/usa/mls/results/"
-        page  = urlopen(url)
-        soup = BeautifulSoup(page, "lxml")
-        o = []
-        gms = soup.findAll('div', attrs={'class':'row-gray'})
-        # iterate and clean the string. real basic.
-        for gm in gms:
-            g = gm.getText()
-            if sys.version_info[0] < 3:
-                g = g.encode('utf-8')
-            g = ' '.join(g.split())
-            g = g.replace('Game Preview', '')
-            g = g.strip()
-            o.append(g)
-        # output
-        if len(o) == 0:
-            return("I didn't find any score at {0}".format(url))
-        else:
-            return('*' * (width + 4) + "{0}".format("\n".join(o)) + '*' * (width + 4))
+    response = requests.get("http://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/scoreboard")
+    data = response.json()
+
+    ret = ''
+    for event in data['events']:
+        home_team = event['competitions'][0]['competitors'][0]['team']['displayName']
+        home_score = event['competitions'][0]['competitors'][0]['score']
+        away_team = event['competitions'][0]['competitors'][1]['team']['displayName']
+        away_score = event['competitions'][0]['competitors'][1]['score']
+        status = event['status']['type']['description']
+
+        ret += f"\n  {home_team} [Home] - [Away] {away_team} Score: {home_score} - {away_score}\n"
+        ret += f"  Game Status: {status}\n"
+
+    return ret
 
 mlscores = MLScores()
-#print(cfl)
+#print(mlscores)
