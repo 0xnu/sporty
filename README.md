@@ -10,10 +10,16 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install followi
 make dev
 ```
 
+Activate virtual environment
+
+```shell
+source .venv/bin/activate
+```
+
 Deactivate virtual environment
 
 ```shell
-make deactivate
+deactivate
 ```
 
 ### Instructions

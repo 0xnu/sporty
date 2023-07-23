@@ -6,7 +6,7 @@ help:
 
 VERSION=0.0.0
 BRANCH=main
-COMMIT_MSG ?= "Makefile"
+COMMIT_MSG ?= "README.md"
 RELEASE_NOTE ?= "Release Note"
 
 # Pull latest changes
