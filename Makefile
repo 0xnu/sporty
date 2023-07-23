@@ -1,4 +1,4 @@
-.PHONY: help clone pull add commit push status log
+.PHONY: help pull acp tag release status log
 
 # Help message
 help:
@@ -6,7 +6,7 @@ help:
 
 VERSION=0.0.0
 BRANCH=main
-COMMIT_MSG ?= "tweaks"
+COMMIT_MSG ?= "Makefile"
 RELEASE_NOTE ?= "Release Note"
 
 # Pull latest changes
