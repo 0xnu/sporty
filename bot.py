@@ -3,7 +3,6 @@ import os
 import time
 import json, traceback
 import config
-import sqlite3
 import telebot
 import logging
 import requests
@@ -15,6 +14,7 @@ from datetime import date
 from datetime import datetime
 from waitress import serve
 from nfl.nflscores import nfl
+from nfl.nflfixtures import nfl_sched
 from nhl.nhlscores import nhlscores
 from nhl.nhltable import nhltable
 from mlb.mlbscores import mlbscores
@@ -328,23 +328,15 @@ def send_nfl(m):
 
 @bot.message_handler(regexp="🏈 NFL Scores")
 def send_nflscores(m):
-  g = nfl
-  user_msg = 'The Kansas City Chiefs are Super Bowl Champions. 🏆🎉\n' + g
+  d = date.today()
+  user_msg = (str(d) + "\n \n" + nfl)
   bot.reply_to(m, user_msg)
-
-nflt = sqlite3.connect('./data/nfl.db')
-cursor = nflt.cursor()
-
-cursor.execute('SELECT * FROM nflfixtures')
-nflf = cursor.fetchall()
 
 @bot.message_handler(regexp="🏈 NFL Fixtures")
 def send_nflfixtures(m):
-    for row in nflf:
-        user_msg = (row[0] + row[1])
-        bot.reply_to(m, user_msg)
-
-nflt.close()
+  d = date.today()
+  user_msg = (str(d) + "\n \n" + nfl_sched)
+  bot.reply_to(m, user_msg)
 
 #hockey section
 @bot.message_handler(regexp="🥅 Hockey")
