@@ -32,6 +32,7 @@ from soccer.seriea_table import serieatable
 from soccer.seriea_scores import serieascores
 from nba.nbadaily import NSN
 from nba.nbastanding import NBAStanding as NSS
+from nba.nbainjury import nba_injuries_df
 from flask import Flask, request, jsonify
 
 # new bot instance
@@ -156,10 +157,9 @@ def send_nbastanding(m):
 
 @bot.message_handler(regexp="🏀 NBA Injury")
 def send_nbainjury(m):
-    k = types.InlineKeyboardMarkup()
-    k.add(types.InlineKeyboardButton("🏀 See NBA Injury", url="https://www.cbssports.com/nba/injuries/"))
-    user_msg = 'Keep up to date on NBA injuries with CBSSports.com\'s injury report.\n\n'
-    bot.reply_to(m, user_msg, reply_markup=k)
+  d = date.today()
+  user_msg = (str(d) + "\n \n" + nba_injuries_df)
+  bot.reply_to(m, user_msg)
 
 # soccer
 @bot.message_handler(regexp="⚽ Soccer")

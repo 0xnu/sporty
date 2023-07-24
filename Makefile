@@ -4,10 +4,10 @@
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\\033[36m%-30s\\033[0m %s\\n", $$1, $$2}'
 
-VERSION=2.0.2
+VERSION=2.0.3
 BRANCH=main
-COMMIT_MSG ?= "nflfixtures.py"
-RELEASE_NOTE ?= "NFL Fixtures Added"
+COMMIT_MSG ?= "nbainjury.py"
+RELEASE_NOTE ?= "NBA Injury Revised"
 
 # Pull latest changes
 pull: ## Pull latest changes
