@@ -6,3 +6,4 @@ waitress
 urlopen
 beautifulsoup4
 lxml
+pandas

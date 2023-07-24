@@ -6,7 +6,7 @@ help:
 
 VERSION=2.0.3
 BRANCH=main
-COMMIT_MSG ?= "nbainjury.py"
+COMMIT_MSG ?= "requirements.txt"
 RELEASE_NOTE ?= "NBA Injury Revised"
 
 # Pull latest changes
