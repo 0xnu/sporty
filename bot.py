@@ -20,7 +20,7 @@ from nhl.nhltable import nhltable
 from mlb.mlbscores import mlbscores
 from soccer.bundesliga_table import bundesligatable
 from soccer.bundesliga_scores import bundesligascores
-from soccer.epltable import t
+from soccer.epltable import epltable
 from soccer.eplscores import n as EPLSCORES
 from soccer.mlstable import mlstable
 from soccer.mlscores import mlscores
@@ -202,7 +202,7 @@ def send_eplscores(m):
 
 @bot.message_handler(regexp="⚽ EPL Table")
 def send_epltable(m):
-  rank = t
+  rank = epltable
   user_msg = rank
   bot.reply_to(m, user_msg)
 

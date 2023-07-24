@@ -8,7 +8,7 @@ def LigueoneTable():
   page = requests.get(url)
   soup = BeautifulSoup(page.content, "lxml")
 
-  table = soup.find("table", {"class": "Yd Zd"})
+  table = soup.find("table", {"class": "Wd Xd"})
 
   # Extract the table rows
   rows = table.find_all("tr")
