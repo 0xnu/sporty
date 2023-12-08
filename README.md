@@ -60,6 +60,6 @@ This project is licensed under the [Unlicense License](LICENSE) - see the file f
 
 ### Copyright
 
-(c) 2020 [Finbarrs Oketunji](https://finbarrs.eu).
+(c) 2020 - 2023 [Finbarrs Oketunji](https://finbarrs.eu).
 
 [![CC0](http://mirrors.creativecommons.org/presskit/buttons/88x31/svg/cc-zero.svg)](LICENSE)
